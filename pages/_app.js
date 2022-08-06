@@ -1,7 +1,15 @@
-import '../styles/globals.css'
+import { SessionProvider } from "next-auth/react";
+import { SSRProvider } from "@react-aria/ssr";
+
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <SSRProvider>
+      <SessionProvider session={pageProps.session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </SSRProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
