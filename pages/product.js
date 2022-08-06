@@ -78,7 +78,7 @@ function Product({ product, session, bal, cart }) {
             href="/"
             style={{ fontWeight: "bold", fontSize: 23 }}
           >
-            Brand
+            Sunset Market
           </Link>
           <button
             data-bs-toggle="collapse"
@@ -240,7 +240,7 @@ function Product({ product, session, bal, cart }) {
       >
         <Modal.Header>
           <Text id="modal-title" style={{ fontWeight: "bold" }} size={25}>
-            BRAND
+            Sunset Market
           </Text>
         </Modal.Header>
         <Modal.Body justify="center">

@@ -45,7 +45,7 @@ function Cart({ products, session, bal }) {
             href="/"
             style={{ fontWeight: "bold", fontSize: 23 }}
           >
-            Brand
+            Sunset Market
           </Link>
           <button
             data-bs-toggle="collapse"
