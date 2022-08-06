@@ -221,7 +221,7 @@ function Product({ product, session, bal, cart }) {
                   <Link
                     id="addtocart"
                     className="ref-button"
-                    onClick={addToCart}
+                    onClick={() => addToCart()}
                   >
                     Add to Cart
                   </Link>
