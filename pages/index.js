@@ -176,7 +176,8 @@ export async function getServerSideProps(context) {
   }
   products = products.filter((x) => x.stock >= 1);
   products = products.map((product) => {
-    product.description = product.description.slice(0, 32) + "...";
+    if (product.description > 32)
+      product.description = product.description.slice(0, 32) + "...";
     return product;
   });
 
