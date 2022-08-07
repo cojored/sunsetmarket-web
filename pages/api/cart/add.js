@@ -16,7 +16,7 @@ function typeCheck(obj) {
 
 async function cartAdd(req, res) {
   if (!req.session.cart) req.session.cart = [];
-  let p = JSON.parse(req.body.product);
+  let p = JSON.parse(req.query.product);
   let product = {
     id: p.id,
     name: p.name,
