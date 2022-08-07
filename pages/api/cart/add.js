@@ -26,7 +26,7 @@ async function cartAdd(req, res) {
     quantity: p.quantity,
     stock: p.stock,
   };
-  if (!typeCheck(product)) return res.status(400).send("BAD REQUEST");
+  if (!typeCheck(product)) return res.redirect("/error?e=" + "BAD REQUEST");
   let filter = req.session.cart.filter((i) => i.id === product.id);
   if (filter.length > 0) {
     let f = filter[0];
