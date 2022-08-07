@@ -26,6 +26,7 @@ function Product({ product, session, bal, cart }) {
   product["quantity"] = count;
 
   const addToCart = () => {
+    product.imageLink = encodeURIComponent(product.imageLink);
     window.location = "/api/cart/add?product=" + JSON.stringify(product);
   };
 
@@ -184,7 +185,7 @@ function Product({ product, session, bal, cart }) {
             <div className="ref-product-data">
               <h2 className="ref-name">{product.name}</h2>
               <strong className="ref-price">
-                {product.price} {bal.currency.rep}
+                {product.price.toLocaleString()} {bal.currency.rep}
               </strong>
               <span>
                 <div className="ref-product-controls">
@@ -197,19 +198,19 @@ function Product({ product, session, bal, cart }) {
                         type="text"
                         id="count"
                         accept="number"
-                        value={count}
+                        value={count.toLocaleString()}
                         onChange={(event) => {
-                          if (isNaN(event.target.value)) return;
-                          if (
-                            silentCount + event.target.value >
-                            product.stock
-                          ) {
+                          value = Number(event.target.value.replace(","));
+                          if (isNaN(value)) return;
+                          if (silentCount + value > product.stock) {
                             setText(
-                              "You can't buy more than " + product.stock + "."
+                              "You can't buy more than " +
+                                product.stock.toLocaleString() +
+                                "."
                             );
                             setVisible(true);
                           } else {
-                            setCount(Number(event.target.value));
+                            setCount(Number(value));
                           }
                         }}
                       />

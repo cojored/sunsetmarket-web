@@ -1,5 +1,13 @@
 import { withSessionSsr } from "../lib/withSession";
-import { Avatar, Dropdown, Text, Button, Link, Image, User } from "@nextui-org/react";
+import {
+  Avatar,
+  Dropdown,
+  Text,
+  Button,
+  Link,
+  Image,
+  User,
+} from "@nextui-org/react";
 import { Buy } from "react-iconly";
 import { signOut } from "next-auth/react";
 import { getSession } from "next-auth/react";
@@ -171,7 +179,7 @@ function Cart({ products, session, bal }) {
                       </div>
                       <div className="ref-price-col">
                         <div className="ref-product-price">
-                          {product.price} {bal.currency.rep}
+                          {product.price.toLocaleString()} {bal.currency.rep}
                         </div>
                       </div>
                       <div className="ref-quantity-col">
@@ -188,9 +196,14 @@ function Cart({ products, session, bal }) {
                               <input
                                 type="text"
                                 id="count"
-                                value={product.quantity}
+                                value={product.quantity.toLocaleString()}
                                 onChange={(event) => {
-                                  window.location = `/api/cart/quantity/set?product=${product.id}&amount=${event.target.value}`;
+                                  window.location = `/api/cart/quantity/set?product=${
+                                    product.id
+                                  }&amount=${event.target.value.replace(
+                                    ",",
+                                    ""
+                                  )}`;
                                 }}
                               />
                               <div className="ref-increase">

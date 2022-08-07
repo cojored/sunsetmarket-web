@@ -147,7 +147,7 @@ function Products({ products, session, bal }) {
                       <p className="ref-excerpt">{product.description}</p>
                     </div>
                     <p className="ref-price">
-                      {product.price} {bal.currency.rep}
+                      {product.price.toLocaleString()} {bal.currency.rep}
                     </p>
                   </div>
                 </Link>
