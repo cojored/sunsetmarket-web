@@ -22,11 +22,12 @@ async function cartAdd(req, res) {
     name: p.name,
     description: p.description,
     price: p.price,
-    imageLink: encodeURIComponent(p.imageLink),
+    imageLink: p.imageLink,
     quantity: p.quantity,
     stock: p.stock,
   };
   if (!typeCheck(product)) return res.redirect("/error?e=" + "BAD REQUEST");
+  product.imageLink = encodeURIComponent(p.imageLink);
   let filter = req.session.cart.filter((i) => i.id === product.id);
   if (filter.length > 0) {
     let f = filter[0];
