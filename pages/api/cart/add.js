@@ -22,7 +22,7 @@ async function cartAdd(req, res) {
     name: p.name,
     description: p.description,
     price: p.price,
-    imageLink: p.imageLink,
+    imageLink: encodeURIComponent(p.imageLink),
     quantity: p.quantity,
     stock: p.stock,
   };

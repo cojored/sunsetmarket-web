@@ -165,7 +165,7 @@ function Cart({ products, session, bal }) {
                         <div className="ref-product-wrapper">
                           <Image
                             className="ref-product-photo"
-                            src={product.imageLink}
+                            src={decodeURIComponent(product.imageLink)}
                             alt="NAME"
                           />
                           <div className="ref-product-data">
