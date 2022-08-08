@@ -186,7 +186,7 @@ function Product({ product, session, bal, cart }) {
               <h2 className="ref-name">{product.name}</h2>
               <strong className="ref-price">
                 Price: {product.price.toLocaleString()} {bal.currency.rep} |
-                Author ID: {product.authorId} | Stock {product.stock}
+                Author ID: {product.author.id} | Stock {product.stock}
               </strong>
               <span>
                 <div className="ref-product-controls">
