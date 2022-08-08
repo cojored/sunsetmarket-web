@@ -1,8 +1,16 @@
 import { getSession } from "next-auth/react";
 import { signOut, signIn } from "next-auth/react";
-import { Avatar, Dropdown, Text, Button, Link, Image } from "@nextui-org/react";
+import {
+  Avatar,
+  Dropdown,
+  Text,
+  Button,
+  Link,
+  Image,
+  Pagination,
+} from "@nextui-org/react";
 import { Buy, User } from "react-iconly";
-function Products({ products, session, bal }) {
+function Products({ products, session, bal, pages, page }) {
   return (
     <>
       <meta charSet="utf-8" />
@@ -156,6 +164,20 @@ function Products({ products, session, bal }) {
           </div>
         </div>
       </div>
+      <footer>
+        <div className="text-center">
+          <Pagination
+            total={pages}
+            initialPage={page}
+            css={{
+              alignContent: "center",
+            }}
+            onChange={(pg) => {
+              window.location = "/?page=" + pg;
+            }}
+          />
+        </div>
+      </footer>
     </>
   );
 }
@@ -175,13 +197,24 @@ export async function getServerSideProps(context) {
     bal = { currency: currency };
   }
   products = products.filter((x) => x.stock >= 1);
+  if (session)
+    products = products.filter((x) => x.author.id != session.user.id);
   products = products.map((product) => {
     if (product.description > 32)
       product.description = product.description.slice(0, 32) + "...";
     return product;
   });
+  const chunkSize = 15;
+  let chunks = [];
+  for (let i = 0; i < products.length; i += chunkSize) {
+    const chunk = products.slice(i, i + chunkSize);
+    chunks.push(chunk);
+  }
+  let chunk = chunks[context.query.page - 1 || 0] || [];
+  let pages = chunks.length === 0 ? 1 : chunks.length;
+  let page = Number(context.query.page) || 1;
 
-  return { props: { products, session, bal } };
+  return { props: { products: chunk, session, bal, pages, page } };
 }
 
 export default Products;
