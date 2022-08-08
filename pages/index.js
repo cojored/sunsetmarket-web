@@ -155,7 +155,8 @@ function Products({ products, session, bal, pages, page }) {
                       <p className="ref-excerpt">{product.description}</p>
                     </div>
                     <p className="ref-price">
-                      {product.price.toLocaleString()} {bal.currency.rep}
+                      Price: {product.price.toLocaleString()} {bal.currency.rep}{" "}
+                      | Author ID: {product.authorId} | Stock {product.stock}
                     </p>
                   </div>
                 </Link>
