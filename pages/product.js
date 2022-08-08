@@ -201,7 +201,7 @@ function Product({ product, session, bal, cart }) {
                         accept="number"
                         value={count.toLocaleString()}
                         onChange={(event) => {
-                          value = Number(event.target.value.replace(","));
+                          let value = Number(event.target.value.replace(","));
                           if (isNaN(value)) return;
                           if (silentCount + value > product.stock) {
                             setText(
